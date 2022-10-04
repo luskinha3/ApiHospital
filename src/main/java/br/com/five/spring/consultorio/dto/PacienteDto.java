@@ -1,6 +1,6 @@
 package br.com.five.spring.consultorio.dto;
 
-import br.com.five.spring.consultorio.modelo.Paciente;
+import br.com.five.spring.consultorio.modelo.PacienteModelo;
 
 public class PacienteDto {
 	
@@ -8,7 +8,7 @@ public class PacienteDto {
 	public String nome;
 	public String cpf;
 	
-	public PacienteDto(Paciente paciente) {
+	public PacienteDto(PacienteModelo paciente) {
 		this.id = paciente.getId().toString();
 		this.nome = paciente.getNome();
 		this.cpf = paciente.getCpf();

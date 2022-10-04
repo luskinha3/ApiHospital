@@ -1,6 +1,6 @@
 package br.com.five.spring.consultorio.dto;
 
-import br.com.five.spring.consultorio.modelo.Medico;
+import br.com.five.spring.consultorio.modelo.MedicoModelo;
 
 public class MedicoDto {
 	
@@ -8,7 +8,7 @@ public class MedicoDto {
 	public String nome;
 	public String crm;
 	
-	public MedicoDto(Medico medico) {
+	public MedicoDto(MedicoModelo medico) {
 		this.id = medico.getId().toString();
 		this.nome = medico.getNome();
 		this.crm = medico.getCrm();

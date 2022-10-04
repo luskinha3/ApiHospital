@@ -10,22 +10,29 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.com.five.spring.consultorio.form.AtendimentoForm;
+
 @Entity
 @Table(name = "atendimentos")
-public class Atendimento {
+public class AtendimentoModelo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 	private LocalDate dataAtendimento;
 	@ManyToOne
-	private Medico medico;
+	private MedicoModelo medico;
 	@ManyToOne
-	private Paciente paciente;
+	private PacienteModelo paciente;
 	private String observacao;
-	private Ativo ativo;
+	private Boolean ativo;
 	
+	public AtendimentoModelo () {}	
 	
+	public AtendimentoModelo(AtendimentoForm atendimentoForm) {
+		this.observacao = atendimentoForm.getObservacao();
+		this.ativo = atendimentoForm.getAtivo();
+	}
 	public UUID getId() {
 		return id;
 	}
@@ -38,16 +45,16 @@ public class Atendimento {
 	public void setDataAtendimento(LocalDate dataAtendimento) {
 		this.dataAtendimento = dataAtendimento;
 	}
-	public Medico getMedico() {
+	public MedicoModelo getMedico() {
 		return medico;
 	}
-	public void setMedico(Medico medico) {
+	public void setMedico(MedicoModelo medico) {
 		this.medico = medico;
 	}
-	public Paciente getPaciente() {
+	public PacienteModelo getPaciente() {
 		return paciente;
 	}
-	public void setPaciente(Paciente paciente) {
+	public void setPaciente(PacienteModelo paciente) {
 		this.paciente = paciente;
 	}
 	public String getObservacao() {
@@ -56,10 +63,10 @@ public class Atendimento {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-	public Ativo getAtivo() {
+	public Boolean getAtivo() {
 		return ativo;
 	}
-	public void setAtivo(Ativo ativo) {
+	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
 	

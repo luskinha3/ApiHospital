@@ -2,14 +2,14 @@ package br.com.five.spring.consultorio.form;
 
 import java.time.LocalDate;
 
-import br.com.five.spring.consultorio.modelo.Sexo;
+import br.com.five.spring.consultorio.modelo.SexoEnum;
 
 public class PacienteForm {
 	
 	private String nome;
 	private String cpf;
 	private LocalDate dataNascimento;
-	private Sexo sexo;
+	private SexoEnum sexo;
 	
 	public String getNome() {
 		return nome;
@@ -29,10 +29,10 @@ public class PacienteForm {
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	public Sexo getSexo() {
+	public SexoEnum getSexo() {
 		return sexo;
 	}
-	public void setSexo(Sexo sexo) {
+	public void setSexo(SexoEnum sexo) {
 		this.sexo = sexo;
 	}
 	

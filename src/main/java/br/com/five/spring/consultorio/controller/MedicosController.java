@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.five.spring.consultorio.dto.MedicoDto;
 import br.com.five.spring.consultorio.form.MedicoForm;
-import br.com.five.spring.consultorio.modelo.Medico;
+import br.com.five.spring.consultorio.modelo.MedicoModelo;
 import br.com.five.spring.consultorio.service.MedicoService;
 
 @RestController
@@ -30,7 +30,7 @@ public class MedicosController {
 	private MedicoService medicoService;
 	
 	@GetMapping
-	public ResponseEntity<List<Medico>> getAllMedicos(){
+	public ResponseEntity<List<MedicoModelo>> getAllMedicos(){
 		return ResponseEntity.status(HttpStatus.OK).body(medicoService.getAll());
 	}
 	

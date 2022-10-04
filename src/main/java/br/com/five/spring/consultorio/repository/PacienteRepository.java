@@ -4,8 +4,8 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.five.spring.consultorio.modelo.Paciente;
+import br.com.five.spring.consultorio.modelo.PacienteModelo;
 
-public interface PacienteRepository extends JpaRepository<Paciente, UUID> {
+public interface PacienteRepository extends JpaRepository<PacienteModelo, UUID> {
 
 }

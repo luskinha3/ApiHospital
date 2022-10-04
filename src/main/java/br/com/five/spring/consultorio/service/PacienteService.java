@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.five.spring.consultorio.dto.PacienteDto;
 import br.com.five.spring.consultorio.form.PacienteForm;
-import br.com.five.spring.consultorio.modelo.Paciente;
+import br.com.five.spring.consultorio.modelo.PacienteModelo;
 import br.com.five.spring.consultorio.repository.PacienteRepository;
 
 @Service
@@ -23,7 +23,7 @@ public class PacienteService {
 	private PacienteRepository pacienteRepository;
 	
 	
-	public List<Paciente> getAll(){
+	public List<PacienteModelo> getAll(){
 		
 		return pacienteRepository.findAll();
 	}
@@ -35,21 +35,21 @@ public class PacienteService {
 	@Transactional
 	public PacienteDto save(PacienteForm pacienteForm) {
 		
-		Paciente paciente = pacienteRepository.save(converterFormToPaciente(pacienteForm));
+		PacienteModelo paciente = pacienteRepository.save(converterFormToPaciente(pacienteForm));
 		return new PacienteDto(paciente);
 	}
 
-	private Paciente converterFormToPaciente(PacienteForm pacienteForm) {
-		return new Paciente (pacienteForm);
+	private PacienteModelo converterFormToPaciente(PacienteForm pacienteForm) {
+		return new PacienteModelo (pacienteForm);
 	}
 	
 	@Transactional
 	public ResponseEntity<Object> delete(UUID uuid) {
-		Optional<Paciente> optional = pacienteRepository.findById(uuid);
+		Optional<PacienteModelo> optional = pacienteRepository.findById(uuid);
 		if(!optional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente não encontrado");
 		}
-		Paciente paciente = optional.get();
+		PacienteModelo paciente = optional.get();
 		if(paciente.hasAtendimentos()) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Você não pode deleter um Paciente que contem atendimentos");
 		}
@@ -59,11 +59,11 @@ public class PacienteService {
 	
 	@Transactional
 	public ResponseEntity<Object> update(UUID uuid, PacienteForm pacienteForm) {
-		Optional<Paciente> optional = pacienteRepository.findById(uuid);
+		Optional<PacienteModelo> optional = pacienteRepository.findById(uuid);
 		if(!optional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente não encontrado");
 		}
-		Paciente paciente = optional.get();
+		PacienteModelo paciente = optional.get();
 		paciente.setNome(pacienteForm.getNome());
 		paciente.setCpf(pacienteForm.getCpf());
 		paciente.setDataNascimento(pacienteForm.getDataNascimento());

@@ -15,11 +15,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import br.com.five.spring.consultorio.form.MedicoForm;
+import br.com.five.spring.consultorio.form.PacienteForm;
 
 @Entity
-@Table(name = "medicos")
-public class Medico {
+@Table(name = "pacientes")
+public class PacienteModelo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,23 +28,20 @@ public class Medico {
 	private String cpf;
 	private LocalDate dataNascimento;
 	@Enumerated(EnumType.STRING)
-	private Sexo sexo;
-	private String crm;
+	private SexoEnum sexo;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "paciente")
+	private List<AtendimentoModelo> atendimentos = new ArrayList<>();
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "medico")
-	private List<Atendimento> atendimentos = new ArrayList<>();
+	public PacienteModelo() {}
 	
-	
-	public Medico() {}
-	
-	public Medico(MedicoForm medicoForm) {
-		this.nome = medicoForm.getNome();
-		this.cpf = medicoForm.getCpf();
-		this.dataNascimento = medicoForm.getDataNascimento();
-		this.sexo = medicoForm.getSexo();
-		this.crm = medicoForm.getCrm();
+	public PacienteModelo (PacienteForm pacienteForm) {
+		this.nome = pacienteForm.getNome();
+		this.cpf = pacienteForm.getCpf();
+		this.dataNascimento = pacienteForm.getDataNascimento();
+		this.sexo = pacienteForm.getSexo();
 	}
+	
 	public UUID getId() {
 		return id;
 	}
@@ -69,21 +66,16 @@ public class Medico {
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	public Sexo getSexo() {
+	public SexoEnum getSexo() {
 		return sexo;
 	}
-	public void setSexo(Sexo sexo) {
+	public void setSexo(SexoEnum sexo) {
 		this.sexo = sexo;
 	}
-	public String getCrm() {
-		return crm;
-	}
-	public void setCrm(String crm) {
-		this.crm = crm;
+
+	public boolean hasAtendimentos() {
+		return ! this.atendimentos.isEmpty();
 	}
 	
-	public boolean hasAtendimentos() {
-		return !this.atendimentos.isEmpty();
-	}
 	
 }

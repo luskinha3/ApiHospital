@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import br.com.five.spring.consultorio.modelo.Sexo;
+import br.com.five.spring.consultorio.modelo.SexoEnum;
 
 public class MedicoForm {
 	
@@ -14,7 +14,7 @@ public class MedicoForm {
 	private String nome;
 	private String cpf;
 	private LocalDate dataNascimento;
-	private Sexo sexo;
+	private SexoEnum sexo;
 	private String crm;
 	public String getNome() {
 		return nome;
@@ -34,10 +34,10 @@ public class MedicoForm {
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	public Sexo getSexo() {
+	public SexoEnum getSexo() {
 		return sexo;
 	}
-	public void setSexo(Sexo sexo) {
+	public void setSexo(SexoEnum sexo) {
 		this.sexo = sexo;
 	}
 	public String getCrm() {

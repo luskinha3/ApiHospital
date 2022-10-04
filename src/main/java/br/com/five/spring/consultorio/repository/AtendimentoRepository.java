@@ -5,9 +5,9 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.five.spring.consultorio.modelo.MedicoModelo;
+import br.com.five.spring.consultorio.modelo.AtendimentoModelo;
 
 @Repository
-public interface MedicoRepository extends  JpaRepository<MedicoModelo, UUID>{
+public interface AtendimentoRepository extends JpaRepository<AtendimentoModelo, UUID> {
 
 }
