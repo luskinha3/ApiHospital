@@ -50,5 +50,10 @@ public class PacientesController {
 		return pacienteService.update(uuid, pacienteForm);
 	}
 	
+	@GetMapping("/{medicoUuid}")
+	public ResponseEntity<Object> getPacientesByMedico(@PathVariable UUID medicoUuid){
+		return pacienteService.getByMedico(medicoUuid);
+	}
+	
 }
 	

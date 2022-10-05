@@ -1,5 +1,8 @@
 package br.com.five.spring.consultorio.dto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import br.com.five.spring.consultorio.modelo.MedicoModelo;
 
 public class MedicoDto {
@@ -31,6 +34,11 @@ public class MedicoDto {
 	}
 	public void setCrm(String crm) {
 		this.crm = crm;
+	}
+
+	public static List<MedicoDto> convertToDtoList(List<MedicoModelo> medicos) {
+		
+		return medicos.stream().map(MedicoDto :: new).collect(Collectors.toList());
 	}
 	
 	

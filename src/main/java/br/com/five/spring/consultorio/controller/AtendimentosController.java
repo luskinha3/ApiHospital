@@ -40,8 +40,7 @@ public class AtendimentosController {
 	
 	@GetMapping("/{dataInicio}/{dataFim}")
 	public ResponseEntity<List<AtendimentoDto>> getAtendimentosBetween(@PathVariable String dataInicio, @PathVariable String dataFim ){
-		
-		
+			
 		return atendimentoService.getBetween(LocalDate.parse(dataInicio), LocalDate.parse(dataFim));
 	}
 }

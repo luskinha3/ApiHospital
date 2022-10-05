@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 import br.com.five.spring.consultorio.dto.PacienteDto;
 import br.com.five.spring.consultorio.form.PacienteForm;
+import br.com.five.spring.consultorio.modelo.MedicoModelo;
 import br.com.five.spring.consultorio.modelo.PacienteModelo;
+import br.com.five.spring.consultorio.repository.MedicoRepository;
 import br.com.five.spring.consultorio.repository.PacienteRepository;
 
 @Service
@@ -21,6 +23,9 @@ public class PacienteService {
 	
 	@Autowired
 	private PacienteRepository pacienteRepository;
+	
+	@Autowired
+	private MedicoRepository medicoRepository;
 	
 	
 	public List<PacienteModelo> getAll(){
@@ -69,6 +74,17 @@ public class PacienteService {
 		pacienteRepository.save(paciente);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(new PacienteDto(paciente));
+	}
+
+	public ResponseEntity<Object> getByMedico(UUID medicoUuid) {
+		Optional<MedicoModelo> medicoOptional = medicoRepository.findById(medicoUuid);
+		if(!medicoOptional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Médico não encontrado");
+		}
+		
+		List<PacienteModelo> pacientes = pacienteRepository.getByMedico(medicoUuid);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(PacienteDto.convertToDtoList(pacientes));
 	}
 	
 	

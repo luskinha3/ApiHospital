@@ -1,5 +1,6 @@
 package br.com.five.spring.consultorio.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -48,6 +49,17 @@ public class MedicosController {
 	@PutMapping("/{uuid}")
 	public ResponseEntity<Object> updateMedico(@PathVariable UUID uuid, @Valid @RequestBody MedicoForm medicoForm){
 		return medicoService.update(uuid, medicoForm);
+	}
+	
+	@GetMapping("/{dataInicio}/{dataFim}")
+	public ResponseEntity<List<MedicoDto>> getAtendimentosBetween(@PathVariable String dataInicio, @PathVariable String dataFim ){
+			
+		return medicoService.getAtendeuBetween(LocalDate.parse(dataInicio), LocalDate.parse(dataFim));
+	}
+	
+	@GetMapping("/{pacienteUuid}")
+	public ResponseEntity<Object> getPacientesByMedico(@PathVariable UUID pacienteUuid){
+		return medicoService.getByPaciente(pacienteUuid);
 	}
 	
 }

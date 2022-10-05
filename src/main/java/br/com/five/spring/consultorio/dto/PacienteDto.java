@@ -1,5 +1,8 @@
 package br.com.five.spring.consultorio.dto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import br.com.five.spring.consultorio.modelo.PacienteModelo;
 
 public class PacienteDto {
@@ -31,6 +34,11 @@ public class PacienteDto {
 	}
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public static List<PacienteDto> convertToDtoList(List<PacienteModelo> pacientes) {
+		
+		return pacientes.stream().map(PacienteDto :: new).collect(Collectors.toList());
 	}
 	
 	

@@ -7,16 +7,28 @@ import javax.validation.constraints.NotNull;
 
 import br.com.five.spring.consultorio.modelo.MedicoModelo;
 import br.com.five.spring.consultorio.modelo.SexoEnum;
+import br.com.five.spring.consultorio.validator.ValidarCPF;
+import br.com.five.spring.consultorio.validator.ValidarCRM;
 
 public class MedicoForm {
 	
 	@NotNull
 	@NotEmpty
 	private String nome;
+	@NotNull
+	@NotEmpty
+	@ValidarCPF
 	private String cpf;
+	@NotNull
+	
 	private LocalDate dataNascimento;
+	
 	private SexoEnum sexo;
+	@NotNull
+	@NotEmpty
+	@ValidarCRM
 	private String crm;
+	
 	public String getNome() {
 		return nome;
 	}

@@ -2,14 +2,27 @@ package br.com.five.spring.consultorio.form;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import br.com.five.spring.consultorio.modelo.PacienteModelo;
 import br.com.five.spring.consultorio.modelo.SexoEnum;
+import br.com.five.spring.consultorio.validator.ValidarCPF;
 
 public class PacienteForm {
 	
+	@NotNull
+	@NotEmpty
 	private String nome;
+	@NotNull
+	@NotEmpty
+	@ValidarCPF
 	private String cpf;
+	@NotNull
+	@NotEmpty
 	private LocalDate dataNascimento;
+	@NotNull
+	@NotEmpty
 	private SexoEnum sexo;
 	
 	public String getNome() {
