@@ -34,14 +34,9 @@ public class MedicoService {
 	
 	@Transactional
 	public MedicoDto save(MedicoForm medicoForm) {
-		
-		MedicoModelo medico = medicoRepository.save(converterFormToMedico(medicoForm));
-		return new MedicoDto(medico);
+		return new MedicoDto(medicoRepository.save(MedicoForm.converterFormToMedico(medicoForm)));
 	}
 
-	private MedicoModelo converterFormToMedico(MedicoForm medicoForm) {
-		return new MedicoModelo (medicoForm);
-	}
 	
 	@Transactional
 	public ResponseEntity<Object> delete(UUID uuid) {

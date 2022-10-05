@@ -2,17 +2,21 @@ package br.com.five.spring.consultorio.service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import br.com.five.spring.consultorio.dto.AtendimentoDto;
 import br.com.five.spring.consultorio.form.AtendimentoForm;
+import br.com.five.spring.consultorio.form.AtendimentoUpdateForm;
 import br.com.five.spring.consultorio.modelo.AtendimentoModelo;
 import br.com.five.spring.consultorio.modelo.MedicoModelo;
 import br.com.five.spring.consultorio.modelo.PacienteModelo;
@@ -46,15 +50,35 @@ public class AtendimentoService {
 		MedicoModelo medico = medicoOptional.get();
 		PacienteModelo paciente = pacienteOptional.get();
 		
-		AtendimentoModelo atendimento = converterFormToAtendimento(atendimentoForm);
+		AtendimentoModelo atendimento = AtendimentoForm.converterFormToAtendimento(atendimentoForm);
 		atendimento.setDataAtendimento(LocalDate.now(ZoneId.of("America/Sao_Paulo")));
 		atendimento.setMedico(medico);
 		atendimento.setPaciente(paciente);
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(atendimentoRepository.save(atendimento));
+		return ResponseEntity.status(HttpStatus.CREATED).body(new AtendimentoDto(atendimentoRepository.save(atendimento)));
 	}
 	
-	public AtendimentoModelo converterFormToAtendimento(AtendimentoForm atendimentoForm) {
-		return new AtendimentoModelo (atendimentoForm);
+	
+	
+	@Transactional
+	public ResponseEntity<Object> update(UUID uuid, @Valid AtendimentoUpdateForm atendimentoUpdateForm) {
+		Optional<AtendimentoModelo> atendimentoOptional = atendimentoRepository.findById(uuid);
+		if(!atendimentoOptional.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Atendimento não encontrado");
+		}
+		AtendimentoModelo atendimento = atendimentoOptional.get();
+		atendimento.setAtivo(atendimentoUpdateForm.getAtivo());
+		atendimento.setObservacao(atendimentoUpdateForm.getObservacao());
+		
+				
+		return ResponseEntity.status(HttpStatus.OK).body(new AtendimentoDto(atendimentoRepository.save(atendimento)));
 	}
+
+	public ResponseEntity<List<AtendimentoDto>> getBetween(LocalDate dataInicio, LocalDate dataFim) {
+		List<AtendimentoModelo> atendimentos = atendimentoRepository.findByDataAtendimentoBetween(dataInicio, dataFim);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(AtendimentoDto.convertToDtoList(atendimentos));
+	}
+	
+	
 }

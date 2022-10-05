@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import br.com.five.spring.consultorio.modelo.MedicoModelo;
 import br.com.five.spring.consultorio.modelo.SexoEnum;
 
 public class MedicoForm {
@@ -45,6 +46,10 @@ public class MedicoForm {
 	}
 	public void setCrm(String crm) {
 		this.crm = crm;
+	}
+	
+	public static MedicoModelo converterFormToMedico(MedicoForm medicoForm) {
+		return new MedicoModelo (medicoForm);
 	}
 	
 	

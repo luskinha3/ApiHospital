@@ -71,4 +71,13 @@ public class AtendimentoModelo {
 	}
 	
 	
+	public String getNomeMedico() {
+		return medico.getNome();
+	}
+	
+	public String getNomePaciente() {
+		return paciente.getNome();
+	}
+	
+	
 }

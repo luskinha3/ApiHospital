@@ -35,13 +35,10 @@ public class PacienteService {
 	@Transactional
 	public PacienteDto save(PacienteForm pacienteForm) {
 		
-		PacienteModelo paciente = pacienteRepository.save(converterFormToPaciente(pacienteForm));
-		return new PacienteDto(paciente);
+		return new PacienteDto(pacienteRepository.save(PacienteForm.converterFormToPaciente(pacienteForm)));
 	}
 
-	private PacienteModelo converterFormToPaciente(PacienteForm pacienteForm) {
-		return new PacienteModelo (pacienteForm);
-	}
+	
 	
 	@Transactional
 	public ResponseEntity<Object> delete(UUID uuid) {

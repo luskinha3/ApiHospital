@@ -2,6 +2,7 @@ package br.com.five.spring.consultorio.form;
 
 import java.time.LocalDate;
 
+import br.com.five.spring.consultorio.modelo.PacienteModelo;
 import br.com.five.spring.consultorio.modelo.SexoEnum;
 
 public class PacienteForm {
@@ -36,5 +37,9 @@ public class PacienteForm {
 		this.sexo = sexo;
 	}
 	
+	
+	public static PacienteModelo converterFormToPaciente(PacienteForm pacienteForm) {
+		return new PacienteModelo (pacienteForm);
+	}
 	
 }

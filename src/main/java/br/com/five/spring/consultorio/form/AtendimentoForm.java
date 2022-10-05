@@ -1,5 +1,7 @@
 package br.com.five.spring.consultorio.form;
 
+import br.com.five.spring.consultorio.modelo.AtendimentoModelo;
+
 public class AtendimentoForm {
 	
 	private String pacienteId;
@@ -32,5 +34,8 @@ public class AtendimentoForm {
 		this.ativo = ativo;
 	}
 	
+	public static AtendimentoModelo converterFormToAtendimento(AtendimentoForm atendimentoForm) {
+		return new AtendimentoModelo (atendimentoForm);
+	}
 	
 }
