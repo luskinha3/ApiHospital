@@ -1,8 +1,10 @@
 package br.com.five.spring.consultorio.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.lowagie.text.DocumentException;
 
 import br.com.five.spring.consultorio.dto.PacienteDto;
 import br.com.five.spring.consultorio.form.PacienteForm;
@@ -53,6 +57,16 @@ public class PacientesController {
 	@GetMapping("/{medicoUuid}")
 	public ResponseEntity<Object> getPacientesByMedico(@PathVariable UUID medicoUuid){
 		return pacienteService.getByMedico(medicoUuid);
+	}
+	
+	@GetMapping("/pdf")
+	public void getPacientesPdf(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/pdf");
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filenam=pdf_pacientes"; 
+		response.setHeader(headerKey, headerValue);
+		
+		pacienteService.generatePdf(response);
 	}
 	
 }

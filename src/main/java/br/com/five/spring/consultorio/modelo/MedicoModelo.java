@@ -85,5 +85,9 @@ public class MedicoModelo {
 	public boolean hasAtendimentos() {
 		return !this.atendimentos.isEmpty();
 	}
+
+	
+	
+	
 	
 }

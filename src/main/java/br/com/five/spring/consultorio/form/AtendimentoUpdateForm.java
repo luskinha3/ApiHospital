@@ -14,7 +14,7 @@ public class AtendimentoUpdateForm {
 	public String getObservacao() {
 		return observacao;
 	}
-	public void setObservação(String observacao) {
+	public void setObservacao(String observacao) {
 		this.observacao = observacao.trim();
 	}
 	public Boolean getAtivo() {

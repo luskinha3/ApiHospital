@@ -78,6 +78,8 @@ public class AtendimentoModelo {
 	public String getNomePaciente() {
 		return paciente.getNome();
 	}
+
+	
 	
 	
 }

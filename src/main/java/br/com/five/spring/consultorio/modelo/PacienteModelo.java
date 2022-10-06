@@ -76,6 +76,14 @@ public class PacienteModelo {
 	public boolean hasAtendimentos() {
 		return ! this.atendimentos.isEmpty();
 	}
+
+	@Override
+	public String toString() {
+		return "PacienteModelo [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento
+				+ ", sexo=" + sexo +  "]";
+	}
+	
+	
 	
 	
 }

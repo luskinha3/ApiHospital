@@ -1,15 +1,25 @@
 package br.com.five.spring.consultorio.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Font;
+import com.lowagie.text.FontFactory;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
 
 import br.com.five.spring.consultorio.dto.PacienteDto;
 import br.com.five.spring.consultorio.form.PacienteForm;
@@ -87,6 +97,24 @@ public class PacienteService {
 		return ResponseEntity.status(HttpStatus.OK).body(PacienteDto.convertToDtoList(pacientes));
 	}
 	
-	
+	public void generatePdf(HttpServletResponse response) throws DocumentException, IOException {
+		
+		List<PacienteModelo> pacientes = pacienteRepository.findAll();
+		
+		Document document = new Document(PageSize.A4);
+		PdfWriter.getInstance(document, response.getOutputStream());
+		
+		document.open();
+		Font font = FontFactory.getFont(FontFactory.HELVETICA);
+		font.setSize(14);
+
+		pacientes.forEach(p -> {
+			Paragraph paragrafo = new Paragraph(p.toString(), font);
+			paragrafo.setAlignment(Paragraph.ALIGN_JUSTIFIED);
+			document.add(paragrafo);
+		});
+		
+		document.close();
+	}
 	
 }
