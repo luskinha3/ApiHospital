@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,7 +60,7 @@ public class AtendimentoService {
 	
 	
 	@Transactional
-	public ResponseEntity<Object> update(UUID uuid, @Valid AtendimentoUpdateForm atendimentoUpdateForm) {
+	public ResponseEntity<Object> update(UUID uuid, AtendimentoUpdateForm atendimentoUpdateForm) {
 		Optional<AtendimentoModelo> atendimentoOptional = atendimentoRepository.findById(uuid);
 		if(!atendimentoOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Atendimento não encontrado");

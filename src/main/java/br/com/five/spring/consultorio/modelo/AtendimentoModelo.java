@@ -31,7 +31,7 @@ public class AtendimentoModelo {
 	
 	public AtendimentoModelo(AtendimentoForm atendimentoForm) {
 		this.observacao = atendimentoForm.getObservacao();
-		this.ativo = atendimentoForm.getAtivo();
+		this.ativo = true;
 	}
 	public UUID getId() {
 		return id;
