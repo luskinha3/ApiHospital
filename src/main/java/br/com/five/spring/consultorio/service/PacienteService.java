@@ -1,25 +1,30 @@
 package br.com.five.spring.consultorio.service;
 
-import java.io.IOException;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Font;
-import com.lowagie.text.FontFactory;
-import com.lowagie.text.PageSize;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.pdf.PdfWriter;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import br.com.five.spring.consultorio.dto.PacienteDto;
 import br.com.five.spring.consultorio.form.PacienteForm;
@@ -97,24 +102,98 @@ public class PacienteService {
 		return ResponseEntity.status(HttpStatus.OK).body(PacienteDto.convertToDtoList(pacientes));
 	}
 	
-	public void generatePdf(HttpServletResponse response) throws DocumentException, IOException {
+	public ResponseEntity<InputStreamResource> generatePdf()  {
 		
 		List<PacienteModelo> pacientes = pacienteRepository.findAll();
 		
-		Document document = new Document(PageSize.A4);
-		PdfWriter.getInstance(document, response.getOutputStream());
-		
-		document.open();
-		Font font = FontFactory.getFont(FontFactory.HELVETICA);
-		font.setSize(14);
+		 ByteArrayInputStream bis = formatarPdf(pacientes);
 
-		pacientes.forEach(p -> {
-			Paragraph paragrafo = new Paragraph(p.toString(), font);
-			paragrafo.setAlignment(Paragraph.ALIGN_JUSTIFIED);
-			document.add(paragrafo);
-		});
+	        var headers = new HttpHeaders();
+	        headers.add("Content-Disposition", "inline; filename=pacientes.pdf");
+
+	        return ResponseEntity
+	                .ok()
+	                .headers(headers)
+	                .contentType(MediaType.APPLICATION_PDF)
+	                .body(new InputStreamResource(bis));
 		
-		document.close();
+		
+	}
+
+	private ByteArrayInputStream formatarPdf(List<PacienteModelo> pacientes) {
+		
+		Document document = new Document();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        try {
+
+            PdfPTable table = new PdfPTable(4);
+            table.setWidthPercentage(100);
+            table.setWidths(new int[]{4, 2, 2, 2});
+
+            Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+
+            PdfPCell hcell;
+
+
+            hcell = new PdfPCell(new Phrase("Nome", headFont));
+            hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(hcell);
+
+            hcell = new PdfPCell(new Phrase("CPF", headFont));
+            hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(hcell);
+            
+            hcell = new PdfPCell(new Phrase("DATA NASCIMENTO", headFont));
+            hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(hcell);
+            
+            hcell = new PdfPCell(new Phrase("SEXO", headFont));
+            hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(hcell);
+            
+            pacientes.forEach(p -> {
+            	
+            	 PdfPCell cell;
+            	 
+                 cell = new PdfPCell(new Phrase(p.getNome()));
+                 cell.setPaddingLeft(5);
+                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+                 table.addCell(cell);
+
+                 cell = new PdfPCell(new Phrase(String.valueOf(p.getCpf())));
+                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                 cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+                 cell.setPaddingRight(5);
+                 table.addCell(cell);
+                 
+                 cell = new PdfPCell(new Phrase(String.valueOf(p.getDataNascimento())));
+                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                 cell.setPaddingRight(5);
+                 table.addCell(cell);
+                 
+                 cell = new PdfPCell(new Phrase(String.valueOf(p.getSexo())));
+                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                 cell.setPaddingRight(5);
+                 table.addCell(cell);
+            });
+               
+
+            PdfWriter.getInstance(document, out);
+            document.open();
+            document.add(table);
+
+            document.close();
+
+        } catch (DocumentException ex) {
+
+            //logger.error("Error occurred: {0}", ex);
+        }
+
+        return new ByteArrayInputStream(out.toByteArray());
 	}
 	
 }

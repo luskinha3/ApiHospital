@@ -79,8 +79,8 @@ public class PacienteModelo {
 
 	@Override
 	public String toString() {
-		return "PacienteModelo [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento
-				+ ", sexo=" + sexo +  "]";
+		return String.format(" %-25s %-20s %14s %20s", getNome(), getCpf(), getDataNascimento(), getSexo() );
+		
 	}
 	
 	
