@@ -1,7 +1,11 @@
 package br.com.five.spring.consultorio.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
 import br.com.five.spring.consultorio.modelo.MedicoModelo;
 
@@ -39,6 +43,13 @@ public class MedicoDto {
 	public static List<MedicoDto> convertToDtoList(List<MedicoModelo> medicos) {
 		
 		return medicos.stream().map(MedicoDto :: new).collect(Collectors.toList());
+	}
+	
+	public static Page<MedicoDto> convertToDtoPage(Page<MedicoModelo> medicos){	
+		List<MedicoDto> listMedicosDto = new ArrayList<MedicoDto>();
+		medicos.forEach(m ->listMedicosDto.add(new MedicoDto(m)));
+		return new PageImpl<MedicoDto>(listMedicosDto, medicos.getPageable(), listMedicosDto.size());
+		
 	}
 	
 	

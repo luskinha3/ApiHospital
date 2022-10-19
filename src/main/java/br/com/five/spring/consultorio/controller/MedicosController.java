@@ -1,12 +1,15 @@
 package br.com.five.spring.consultorio.controller;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,8 +34,8 @@ public class MedicosController {
 	private MedicoService medicoService;
 	
 	@GetMapping
-	public ResponseEntity<List<MedicoModelo>> getAllMedicos(){
-		return ResponseEntity.status(HttpStatus.OK).body(medicoService.getAll());
+	public ResponseEntity<Page<MedicoModelo>> getAllMedicos(@PageableDefault(page = 0, size = 10, sort = "nome", direction = Sort.Direction.ASC) Pageable pageable){
+		return ResponseEntity.status(HttpStatus.OK).body(medicoService.getAll(pageable));
 	}
 	
 	@PostMapping
@@ -52,14 +55,14 @@ public class MedicosController {
 	}
 	
 	@GetMapping("/{dataInicio}/{dataFim}")
-	public ResponseEntity<List<MedicoDto>> getAtendimentosBetween(@PathVariable String dataInicio, @PathVariable String dataFim ){
+	public ResponseEntity<Page<MedicoDto>> getAtendimentosBetween(@PageableDefault(page = 0, size = 10, sort = "medico.nome", direction = Sort.Direction.ASC) Pageable pageable, @PathVariable String dataInicio, @PathVariable String dataFim ){
 			
-		return medicoService.getAtendeuBetween(LocalDate.parse(dataInicio), LocalDate.parse(dataFim));
+		return medicoService.getAtendeuBetween(LocalDate.parse(dataInicio), LocalDate.parse(dataFim), pageable);
 	}
 	
 	@GetMapping("/{pacienteUuid}")
-	public ResponseEntity<Object> getPacientesByMedico(@PathVariable UUID pacienteUuid){
-		return medicoService.getByPaciente(pacienteUuid);
+	public ResponseEntity<Object> getMedicosByPaciente(@PageableDefault(page = 0, size = 10, sort = "nome", direction = Sort.Direction.ASC) Pageable pageable, @PathVariable UUID pacienteUuid){
+		return medicoService.getByPaciente(pacienteUuid, pageable);
 	}
 	
 }

@@ -1,4 +1,4 @@
-package br.com.five.spring.consultorio.config.validacao.handler;
+package br.com.five.spring.consultorio.config.validacao;
 
 public class ErroHandlerDTO {
 	

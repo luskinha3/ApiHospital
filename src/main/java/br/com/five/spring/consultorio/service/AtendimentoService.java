@@ -2,13 +2,14 @@ package br.com.five.spring.consultorio.service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -73,10 +74,10 @@ public class AtendimentoService {
 		return ResponseEntity.status(HttpStatus.OK).body(new AtendimentoDto(atendimentoRepository.save(atendimento)));
 	}
 
-	public ResponseEntity<List<AtendimentoDto>> getBetween(LocalDate dataInicio, LocalDate dataFim) {
-		List<AtendimentoModelo> atendimentos = atendimentoRepository.findByDataAtendimentoBetween(dataInicio, dataFim);
+	public ResponseEntity<Page<AtendimentoDto>> getBetween(LocalDate dataInicio, LocalDate dataFim, Pageable pageable) {
+		Page<AtendimentoModelo> atendimentos = atendimentoRepository.findByDataAtendimentoBetween(dataInicio, dataFim, pageable);
 		
-		return ResponseEntity.status(HttpStatus.OK).body(AtendimentoDto.convertToDtoList(atendimentos));
+		return ResponseEntity.status(HttpStatus.OK).body(AtendimentoDto.convertToDtoPage(atendimentos));
 	}
 	
 	

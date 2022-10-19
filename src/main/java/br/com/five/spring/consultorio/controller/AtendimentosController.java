@@ -1,12 +1,15 @@
 package br.com.five.spring.consultorio.controller;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,8 +42,8 @@ public class AtendimentosController {
 	}
 	
 	@GetMapping("/{dataInicio}/{dataFim}")
-	public ResponseEntity<List<AtendimentoDto>> getAtendimentosBetween(@PathVariable String dataInicio, @PathVariable String dataFim ){
+	public ResponseEntity<Page<AtendimentoDto>> getAtendimentosBetween(@PageableDefault(page = 0, size = 10, sort = "dataAtendimento", direction = Sort.Direction.ASC) Pageable pageable, @PathVariable String dataInicio, @PathVariable String dataFim ){
 			
-		return atendimentoService.getBetween(LocalDate.parse(dataInicio), LocalDate.parse(dataFim));
+		return atendimentoService.getBetween(LocalDate.parse(dataInicio), LocalDate.parse(dataFim), pageable);
 	}
 }

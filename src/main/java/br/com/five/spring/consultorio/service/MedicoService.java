@@ -1,13 +1,14 @@
 package br.com.five.spring.consultorio.service;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -33,9 +34,9 @@ public class MedicoService {
 	private PacienteRepository pacienteRepository;
 	
 	
-	public List<MedicoModelo> getAll(){
+	public Page<MedicoModelo> getAll(Pageable pageable){
 		
-		return medicoRepository.findAll();
+		return medicoRepository.findAll(pageable);
 	}
 	
 	//private List<MedicoDto> converteMedicoToDto(List<Medico> medicos){
@@ -80,20 +81,20 @@ public class MedicoService {
 		return ResponseEntity.status(HttpStatus.OK).body(new MedicoDto(medico));
 	}
 
-	public ResponseEntity<List<MedicoDto>> getAtendeuBetween(LocalDate dataInicio, LocalDate dataFim) {
-		List<MedicoModelo> medicos = atendimentoRepository.findMedicosAtenderamBetweenDatas(dataInicio, dataFim);
-		return ResponseEntity.status(HttpStatus.OK).body(MedicoDto.convertToDtoList(medicos));
+	public ResponseEntity<Page<MedicoDto>> getAtendeuBetween(LocalDate dataInicio, LocalDate dataFim, Pageable pageable) {
+		Page<MedicoModelo> medicos = atendimentoRepository.findMedicosAtenderamBetweenDatas(dataInicio, dataFim, pageable);
+		return ResponseEntity.status(HttpStatus.OK).body(MedicoDto.convertToDtoPage(medicos));
 	}
 
-	public ResponseEntity<Object> getByPaciente(UUID pacienteUuid) {
+	public ResponseEntity<Object> getByPaciente(UUID pacienteUuid, Pageable pageable) {
 		Optional<PacienteModelo> pacienteOptional = pacienteRepository.findById(pacienteUuid);
 		if(!pacienteOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Paciente não encontrado");
 		}
 		
-		List<MedicoModelo> medicos = medicoRepository.getByPaciente(pacienteUuid);
+		Page<MedicoModelo> medicos = medicoRepository.getByPaciente(pacienteUuid, pageable);
 		
-		return ResponseEntity.status(HttpStatus.OK).body(MedicoDto.convertToDtoList(medicos));
+		return ResponseEntity.status(HttpStatus.OK).body(MedicoDto.convertToDtoPage(medicos));
 	}
 	
 	

@@ -7,8 +7,8 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import br.com.five.spring.consultorio.enums.SexoEnum;
 import br.com.five.spring.consultorio.modelo.MedicoModelo;
-import br.com.five.spring.consultorio.modelo.SexoEnum;
 import br.com.five.spring.consultorio.validator.ValidarCPF;
 import br.com.five.spring.consultorio.validator.ValidarCRM;
 

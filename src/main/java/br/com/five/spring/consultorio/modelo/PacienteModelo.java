@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.five.spring.consultorio.enums.SexoEnum;
 import br.com.five.spring.consultorio.form.PacienteForm;
 
 @Entity

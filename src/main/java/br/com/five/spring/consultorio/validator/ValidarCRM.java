@@ -10,7 +10,6 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 
-
 @Target({ElementType.TYPE, ElementType.FIELD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = CRMValidator.class)

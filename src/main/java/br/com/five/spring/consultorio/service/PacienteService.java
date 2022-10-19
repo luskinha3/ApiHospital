@@ -10,6 +10,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -43,9 +45,9 @@ public class PacienteService {
 	private MedicoRepository medicoRepository;
 	
 	
-	public List<PacienteModelo> getAll(){
+	public Page<PacienteModelo> getAll(Pageable pageable){
 		
-		return pacienteRepository.findAll();
+		return pacienteRepository.findAll(pageable);
 	}
 	
 	//private List<MedicoDto> converteMedicoToDto(List<Medico> medicos){
@@ -91,22 +93,22 @@ public class PacienteService {
 		return ResponseEntity.status(HttpStatus.OK).body(new PacienteDto(paciente));
 	}
 
-	public ResponseEntity<Object> getByMedico(UUID medicoUuid) {
+	public ResponseEntity<Object> getByMedico(UUID medicoUuid, Pageable pageable) {
 		Optional<MedicoModelo> medicoOptional = medicoRepository.findById(medicoUuid);
 		if(!medicoOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Médico não encontrado");
 		}
 		
-		List<PacienteModelo> pacientes = pacienteRepository.getByMedico(medicoUuid);
+		Page<PacienteModelo> pacientes = pacienteRepository.getByMedico(medicoUuid, pageable);
 		
-		return ResponseEntity.status(HttpStatus.OK).body(PacienteDto.convertToDtoList(pacientes));
+		return ResponseEntity.status(HttpStatus.OK).body(PacienteDto.convertToDtoPage(pacientes));
 	}
 	
-	public ResponseEntity<InputStreamResource> generatePdf()  {
+	public ResponseEntity<InputStreamResource> generatePdf(Pageable pageable)  {
 		
-		List<PacienteModelo> pacientes = pacienteRepository.findAll();
+		Page<PacienteModelo> pacientes = pacienteRepository.findAll(pageable);
 		
-		 ByteArrayInputStream bis = formatarPdf(pacientes);
+		 ByteArrayInputStream bis = formatarPdf(pacientes.toList());
 
 	        var headers = new HttpHeaders();
 	        headers.add("Content-Disposition", "inline; filename=pacientes.pdf");
