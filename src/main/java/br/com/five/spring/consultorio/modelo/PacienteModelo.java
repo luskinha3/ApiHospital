@@ -19,12 +19,12 @@ import br.com.five.spring.consultorio.enums.SexoEnum;
 import br.com.five.spring.consultorio.form.PacienteForm;
 
 @Entity
-@Table(name = "pacientes")
+@Table(name = "TB_pacientes")
 public class PacienteModelo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private UUID id;
+	private UUID pacienteId;
 	private String nome;
 	private String cpf;
 	private LocalDate dataNascimento;
@@ -43,11 +43,11 @@ public class PacienteModelo {
 		this.sexo = pacienteForm.getSexo();
 	}
 	
-	public UUID getId() {
-		return id;
+	public UUID getPacienteId() {
+		return pacienteId;
 	}
-	public void setId(UUID id) {
-		this.id = id;
+	public void setPacienteId(UUID pacienteId) {
+		this.pacienteId = pacienteId;
 	}
 	public String getNome() {
 		return nome;

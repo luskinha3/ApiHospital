@@ -11,21 +11,21 @@ import br.com.five.spring.consultorio.modelo.PacienteModelo;
 
 public class PacienteDto {
 	
-	public String id;
+	public String pacienteId;
 	public String nome;
 	public String cpf;
 	
 	public PacienteDto(PacienteModelo paciente) {
-		this.id = paciente.getId().toString();
+		this.pacienteId = paciente.getPacienteId().toString();
 		this.nome = paciente.getNome();
 		this.cpf = paciente.getCpf();
 	}
 	
-	public String getId() {
-		return id;
+	public String getPacienteId() {
+		return pacienteId;
 	}
 	public void setId(String id) {
-		this.id = id;
+		this.pacienteId = id;
 	}
 	public String getNome() {
 		return nome;

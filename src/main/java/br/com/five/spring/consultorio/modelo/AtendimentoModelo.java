@@ -13,12 +13,12 @@ import javax.persistence.Table;
 import br.com.five.spring.consultorio.form.AtendimentoForm;
 
 @Entity
-@Table(name = "atendimentos")
+@Table(name = "TB_atendimentos")
 public class AtendimentoModelo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private UUID id;
+	private UUID atendimentoId;
 	private LocalDate dataAtendimento;
 	@ManyToOne
 	private MedicoModelo medico;
@@ -33,11 +33,11 @@ public class AtendimentoModelo {
 		this.observacao = atendimentoForm.getObservacao();
 		this.ativo = true;
 	}
-	public UUID getId() {
-		return id;
+	public UUID getAtendimentoId() {
+		return atendimentoId;
 	}
-	public void setId(UUID id) {
-		this.id = id;
+	public void setAtendimentoId(UUID atendimentoId) {
+		this.atendimentoId = atendimentoId;
 	}
 	public LocalDate getDataAtendimento() {
 		return dataAtendimento;

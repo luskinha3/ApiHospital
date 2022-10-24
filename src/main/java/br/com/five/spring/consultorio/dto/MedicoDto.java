@@ -11,21 +11,21 @@ import br.com.five.spring.consultorio.modelo.MedicoModelo;
 
 public class MedicoDto {
 	
-	public String id;
+	public String medicoId;
 	public String nome;
 	public String crm;
 	
 	public MedicoDto(MedicoModelo medico) {
-		this.id = medico.getId().toString();
+		this.medicoId = medico.getMedicoId().toString();
 		this.nome = medico.getNome();
 		this.crm = medico.getCrm();
 	}
 	
-	public String getId() {
-		return id;
+	public String getMedicoId() {
+		return medicoId;
 	}
 	public void setId(String uuid) {
-		this.id = uuid;
+		this.medicoId = uuid;
 	}
 	public String getNome() {
 		return nome;

@@ -17,7 +17,7 @@ import org.springframework.security.core.GrantedAuthority;
 import br.com.five.spring.consultorio.enums.RoleName;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "TB_roles")
 public class PapelModel implements GrantedAuthority, Serializable {
 
 

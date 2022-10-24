@@ -23,21 +23,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 import br.com.five.spring.consultorio.form.CadastroUsuarioForm;
 
 @Entity
-@Table(name = "users")
+@Table(name = "TB_users")
 public class UsuarioModelo implements UserDetails, Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private UUID uuid;
+	private UUID usuarioId;
 	@Column(nullable = false, unique = true)
 	private String username;
 	@Column(nullable = false)
 	private String password;
 	@ManyToMany
 	@JoinTable(name = "users_roles", 
-	joinColumns = @JoinColumn(name = "uuid"),
+	joinColumns = @JoinColumn(name = "usuario_id"),
 	inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<PapelModel> papeis;
 	
@@ -78,11 +78,11 @@ public class UsuarioModelo implements UserDetails, Serializable {
 		return true;
 	}
 	
-	public UUID getUuid() {
-		return uuid;
+	public UUID getUsuarioId() {
+		return usuarioId;
 	}
-	public void setUuid(UUID uuid) {
-		this.uuid = uuid;
+	public void setUsuarioId(UUID uuid) {
+		this.usuarioId = uuid;
 	}
 	public void setUsername(String username) {
 		this.username = username;

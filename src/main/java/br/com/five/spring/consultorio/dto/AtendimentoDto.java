@@ -12,7 +12,7 @@ import br.com.five.spring.consultorio.modelo.AtendimentoModelo;
 
 public class AtendimentoDto {
 	
-	private String uuid;
+	private String atendimentoId;
 	private String nomeMedico;
 	private String nomePaciente;
 	private LocalDate dataAtendimento;
@@ -20,7 +20,7 @@ public class AtendimentoDto {
 	private Boolean ativo;
 	
 	public AtendimentoDto(AtendimentoModelo atendimento) {
-		this.uuid = atendimento.getId().toString();
+		this.atendimentoId = atendimento.getAtendimentoId().toString();
 		this.observacao = atendimento.getObservacao();
 		this.ativo = atendimento.getAtivo();
 		this.dataAtendimento = atendimento.getDataAtendimento();
@@ -44,8 +44,8 @@ public class AtendimentoDto {
 		return ativo;
 	}
 
-	public String getUuid() {
-		return uuid;
+	public String getAtendimentoId() {
+		return atendimentoId;
 	}
 	
 	public static List<AtendimentoDto> convertToDtoList(List<AtendimentoModelo> atendimentos){
