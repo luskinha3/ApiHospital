@@ -11,7 +11,7 @@ import br.com.five.spring.consultorio.modelo.PacienteModelo;
 
 public interface PacienteRepository extends JpaRepository<PacienteModelo, UUID> {
 	
-	@Query("SELECT p FROM PacienteModelo p JOIN MedicoModelo m on m.id = ?1 ")
+	@Query("SELECT p FROM PacienteModelo p JOIN AtendimentoModelo a ON a.medico.medicoId = ?1 GROUP BY p.pacienteId  ")
 	Page<PacienteModelo> getByMedico(UUID medicoUuid, Pageable pageable);
 
 }
