@@ -24,13 +24,15 @@ public class ProdWebSecurityConfig {
 			.and()
 			.authorizeHttpRequests()
 			.antMatchers(HttpMethod.GET, "/**").hasAnyAuthority(RoleName.ROLE_USER.toString(), RoleName.ROLE_ADMIN.toString(), RoleName.ROLE_SUPER_USER.toString())
-			.antMatchers(HttpMethod.PUT, "/**").hasAnyAuthority(RoleName.ROLE_ADMIN.toString(), RoleName.ROLE_SUPER_USER.toString())
+			.antMatchers(HttpMethod.PUT, "/**").hasAnyAuthority(RoleName.ROLE_ADMIN.toString(), RoleName.ROLE_SUPER_USER.toString())			
 			.antMatchers(HttpMethod.DELETE, "/**").hasAnyAuthority(RoleName.ROLE_ADMIN.toString(), RoleName.ROLE_SUPER_USER.toString())
 			.antMatchers(HttpMethod.POST, "/atendimentos").hasAnyAuthority(RoleName.ROLE_ADMIN.toString(), RoleName.ROLE_SUPER_USER.toString())
 			.antMatchers(HttpMethod.POST, "/medicos").hasAnyAuthority(RoleName.ROLE_ADMIN.toString(), RoleName.ROLE_SUPER_USER.toString())
 			.antMatchers(HttpMethod.POST, "/pacientes").hasAnyAuthority(RoleName.ROLE_ADMIN.toString(), RoleName.ROLE_SUPER_USER.toString())
 			.antMatchers(HttpMethod.POST, "/usuarios/default").hasAnyAuthority(RoleName.ROLE_ADMIN.toString(), RoleName.ROLE_SUPER_USER.toString())
 			.antMatchers(HttpMethod.POST, "/usuarios/admin").hasAnyAuthority(RoleName.ROLE_SUPER_USER.toString())
+			.antMatchers(HttpMethod.POST, "/role").hasAnyAuthority(RoleName.ROLE_SUPER_USER.toString())
+			.antMatchers(HttpMethod.POST,"/usuarios/super").denyAll()
 			.anyRequest().authenticated()
 			.and().addFilterAfter(new CsrfLoggerFilter(), CsrfFilter.class);
 		return http.build();

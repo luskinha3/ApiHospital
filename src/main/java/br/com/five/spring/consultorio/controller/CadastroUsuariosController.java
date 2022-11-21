@@ -30,4 +30,9 @@ public class CadastroUsuariosController {
 	public ResponseEntity<Object> saveUsuarioAdmin(@RequestBody @Valid CadastroUsuarioForm cadastroUsuarioForm ){
 		return cadastroUsuarioService.saveAdmin(cadastroUsuarioForm);
 	}
+	
+	@PostMapping("/super")
+	public ResponseEntity<Object> saveUsuarioSuperUser(@RequestBody @Valid CadastroUsuarioForm cadastroUsuarioForm ){
+		return cadastroUsuarioService.saveSuperUser(cadastroUsuarioForm);
+	}
 }

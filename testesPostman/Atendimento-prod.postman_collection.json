@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "445af6b9-b83c-4ce7-9abd-a9857cbdb88c",
+		"name": "Atendimento-prod",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Save",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "fiveTestes1622@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "susan",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "d51923dc-8694-4cef-89e7-c0bf07a62a31",
+						"type": "default"
+					},
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID=32188E7CD81BEEB7623C314BC0E7E67B",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pacienteId\" : \"90029a8b-e1ef-4e4d-a521-2129d7769449\",\n    \"medicoId\" : \"83d77882-acd7-461f-9983-221a022a77b0\",\n    \"observacao\" : \"Tomar remedios de 8 em 8 horas\"\n}"
+				},
+				"url": {
+					"raw": "http://www.localhost:8080/atendimentos",
+					"protocol": "http",
+					"host": [
+						"www",
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"atendimentos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "fiveTestes1622@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "susan",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "d51923dc-8694-4cef-89e7-c0bf07a62a31",
+						"type": "default"
+					},
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID=32188E7CD81BEEB7623C314BC0E7E67B",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"observacao\" : \"Ficar em observacao na ala de neurologia\",\n    \"ativo\" : true\n}"
+				},
+				"url": {
+					"raw": "http://www.localhost:8080/atendimentos/7e14b717-5917-4e24-9465-2b6d8e7e74b1",
+					"protocol": "http",
+					"host": [
+						"www",
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"atendimentos",
+						"7e14b717-5917-4e24-9465-2b6d8e7e74b1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Between datas",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "comum123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "comum",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "3da716ab-362e-4528-bd7f-7e1153624f3e",
+						"type": "default"
+					},
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID=555DE8F8207F726550A8AA0C86B647E8",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://www.localhost:8080/atendimentos/2022-10-23/2022-10-27",
+					"protocol": "http",
+					"host": [
+						"www",
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"atendimentos",
+						"2022-10-23",
+						"2022-10-27"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

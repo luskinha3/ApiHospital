@@ -36,5 +36,12 @@ public class CadastroUsuarioService {
 		return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
 	
 	}
+
+	public ResponseEntity<Object> saveSuperUser(@Valid CadastroUsuarioForm cadastroUsuarioForm) {
+		UsuarioModelo usuario = CadastroUsuarioForm.toUsuario(cadastroUsuarioForm);		
+		usuario.adicionarPapel(papelRepository.findByRolename(RoleName.ROLE_SUPER_USER));
+		usuarioRepository.save(usuario);
+		return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
+	}
 	
 }

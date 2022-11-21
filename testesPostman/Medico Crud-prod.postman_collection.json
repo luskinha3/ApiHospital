@@ -1,0 +1,275 @@
+{
+	"info": {
+		"_postman_id": "af546a86-b697-458d-98eb-d70c444cf022",
+		"name": "Medico Crud-prod",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "All",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "fiveTestes1622@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "susan",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.localhost:8080/medicos",
+					"protocol": "http",
+					"host": [
+						"www",
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"medicos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "fiveTestes1622@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "susan",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "ce9a1a0a-3e85-4127-98ef-345a874f148d",
+						"type": "default"
+					},
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID=4FDC0A84A8BA64209DC57FFB5BD0A95F",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nome\" : \"jucelino\",\n    \"cpf\" : \"000.000.000-00\",\n    \"dataNascimento\" : \"2022-07-07\",\n    \"sexo\" : \"MASCULINO\",\n    \"crm\" : \"999999/SP\"\n}"
+				},
+				"url": {
+					"raw": "http://www.localhost:8080/medicos",
+					"protocol": "http",
+					"host": [
+						"www",
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"medicos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "fiveTestes1622@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "susan",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID=4FDC0A84A8BA64209DC57FFB5BD0A95F",
+						"type": "default"
+					},
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "ce9a1a0a-3e85-4127-98ef-345a874f148d",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://www.localhost:8080/medicos/34998801-090d-47dd-8923-e39824453c42",
+					"protocol": "http",
+					"host": [
+						"www",
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"medicos",
+						"34998801-090d-47dd-8923-e39824453c42"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "fiveTestes1622@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "susan",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "ce9a1a0a-3e85-4127-98ef-345a874f148d",
+						"type": "default"
+					},
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID=4FDC0A84A8BA64209DC57FFB5BD0A95F",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nome\" : \"reberval\",\n    \"cpf\" : \"234.675.888-00\",\n    \"dataNascimento\" : \"2022-07-07\",\n    \"sexo\" : \"MASCULINO\",\n    \"crm\" : \"999999/RJ\"\n}"
+				},
+				"url": {
+					"raw": "http://www.localhost:8080/medicos/83d77882-acd7-461f-9983-221a022a77b0",
+					"protocol": "http",
+					"host": [
+						"www",
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"medicos",
+						"83d77882-acd7-461f-9983-221a022a77b0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trabalharam between datas",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "comum123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "comum",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.localhost:8080/medicos/2022-10-23/2022-10-25",
+					"protocol": "http",
+					"host": [
+						"www",
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"medicos",
+						"2022-10-23",
+						"2022-10-25"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "By paciente",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "comum123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "comum",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.localhost:8080/medicos/3b4d019f-2e17-41be-9e77-263445dd42f9",
+					"protocol": "http",
+					"host": [
+						"www",
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"medicos",
+						"3b4d019f-2e17-41be-9e77-263445dd42f9"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

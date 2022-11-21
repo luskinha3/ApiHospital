@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "60d53767-d8ee-4c65-ba39-24fd435cf719",
+		"name": "Usuario",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Usuario-user",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "fiveTestes1622@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "susan",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "d51923dc-8694-4cef-89e7-c0bf07a62a31",
+						"type": "default"
+					},
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID=32188E7CD81BEEB7623C314BC0E7E67B",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\" : \"testeComum\",\n    \"password\" : \"testeComum123\"  \n}"
+				},
+				"url": {
+					"raw": "http://www.localhost:8080/usuarios/default",
+					"protocol": "http",
+					"host": [
+						"www",
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"usuarios",
+						"default"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usuario-admin",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "fiveTestes1622@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "susan",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "d51923dc-8694-4cef-89e7-c0bf07a62a31",
+						"type": "default"
+					},
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID=32188E7CD81BEEB7623C314BC0E7E67B",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\" : \"testeAdmin1\",\n    \"password\" : \"testeAdmin123\"  \n}"
+				},
+				"url": {
+					"raw": "http://www.localhost:8080/usuarios/admin",
+					"protocol": "http",
+					"host": [
+						"www",
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"usuarios",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "role",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "fiveTestes1622@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "susan",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "d51923dc-8694-4cef-89e7-c0bf07a62a31",
+						"type": "default"
+					},
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID=32188E7CD81BEEB7623C314BC0E7E67B",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"ROLE_USER\"\n}"
+				},
+				"url": {
+					"raw": "http://www.localhost:8080/role",
+					"protocol": "http",
+					"host": [
+						"www",
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"role"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usuario-super-user",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "fiveTestes1622@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "susan",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "d51923dc-8694-4cef-89e7-c0bf07a62a31",
+						"type": "default"
+					},
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID=32188E7CD81BEEB7623C314BC0E7E67B",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\" : \"teste2\",\n    \"password\" : \"teste123\"  \n}"
+				},
+				"url": {
+					"raw": "http://www.localhost:8080/usuarios/super",
+					"protocol": "http",
+					"host": [
+						"www",
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"usuarios",
+						"super"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

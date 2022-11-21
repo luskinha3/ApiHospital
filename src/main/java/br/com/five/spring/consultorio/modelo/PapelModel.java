@@ -11,10 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.Valid;
 
 import org.springframework.security.core.GrantedAuthority;
 
 import br.com.five.spring.consultorio.enums.RoleName;
+import br.com.five.spring.consultorio.form.RoleForm;
 
 @Entity
 @Table(name = "TB_roles")
@@ -30,6 +32,12 @@ public class PapelModel implements GrantedAuthority, Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, unique = true)
 	private RoleName rolename;
+
+	public PapelModel(@Valid RoleForm roleForm) {
+		this.rolename =  RoleName.valueOf(roleForm.getName());
+	}
+	
+	public PapelModel() {}
 
 	@Override
 	public String getAuthority() {
